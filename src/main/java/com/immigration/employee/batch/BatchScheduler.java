@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Component used to execute the batch job on a schedule.
  *
- * @author Brad Mongeon
+ * 
  */
 @Component
 @EnableScheduling
