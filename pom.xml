@@ -11,17 +11,12 @@
     <name>AlertMe</name>
     <description>Demo project for Spring Boot</description>
 
-    <!--<parent>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
-        <!--<version>2.0.2.RELEASE</version>-->
-        <!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
-    <!--</parent>-->
-
+    //change the parent according to your organization. 
     <parent>
-        <groupId>com.lmig.gs</groupId>
-        <artifactId>gs-organization</artifactId>
-        <version>1.0</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <properties>

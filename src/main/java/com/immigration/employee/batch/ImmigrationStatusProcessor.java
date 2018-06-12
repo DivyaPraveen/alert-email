@@ -35,7 +35,7 @@ public class ImmigrationStatusProcessor implements ItemProcessor<User, MimeMessa
         MailInfoDTO gnibMail = new MailInfoDTO();
         gnibMail.setEmailId(user.getEmailId());
         gnibMail.setEmpNbr(user.getN_number());
-        gnibMail.setExpiryDate(user.getGnibInformation().getValidTo());
+        gnibMail.setExpiryDate(user.getImmigrationCardInfo().getValidTo());
 
 
         List<VisaInformation> visas = user.getVisas();

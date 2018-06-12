@@ -9,7 +9,6 @@ package com.immigration.employee.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,7 +33,7 @@ public class User implements Serializable {
     private String passport_nbr;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private GnibInformation gnibInformation;
+    private ImmigrationCardInfo immigrationCardInfo;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<VisaInformation> visas;
@@ -80,12 +79,12 @@ public class User implements Serializable {
         this.passport_nbr = passport_nbr;
     }
 
-    public GnibInformation getGnibInformation() {
-        return gnibInformation;
+    public ImmigrationCardInfo getImmigrationCardInfo() {
+        return immigrationCardInfo;
     }
 
-    public void setGnibInformation(GnibInformation gnibInformation) {
-        this.gnibInformation = gnibInformation;
+    public void setImmigrationCardInfo(ImmigrationCardInfo immigrationCardInfo) {
+        this.immigrationCardInfo = immigrationCardInfo;
     }
 
     @Override
@@ -96,7 +95,7 @@ public class User implements Serializable {
                 ", emailId='" + emailId + '\'' +
                 ", nationality='" + nationality + '\'' +
                 ", passport_nbr='" + passport_nbr + '\'' +
-                ", gnibInformation=" + gnibInformation +
+                ", immigrationCardInfo=" + immigrationCardInfo +
                 ", visas=" + visas +
                 '}';
     }

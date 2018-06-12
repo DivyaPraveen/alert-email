@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "gnib_info")
-public class GnibInformation {
+public class ImmigrationCardInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")
@@ -77,7 +77,7 @@ public class GnibInformation {
 
     @Override
     public String toString() {
-        return "GnibInformation{" +
+        return "ImmigrationCardInfo{" +
                 "id=" + id +
                 ", gnibNbr=" + gnibNbr +
                 ", stamp='" + stamp + '\'' +
