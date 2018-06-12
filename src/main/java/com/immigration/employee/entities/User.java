@@ -36,6 +36,10 @@ public class User implements Serializable {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private GnibInformation gnibInformation;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<VisaInformation> visas;
+
+
     public Long getId() {
         return id;
     }
@@ -93,6 +97,15 @@ public class User implements Serializable {
                 ", nationality='" + nationality + '\'' +
                 ", passport_nbr='" + passport_nbr + '\'' +
                 ", gnibInformation=" + gnibInformation +
+                ", visas=" + visas +
                 '}';
+    }
+
+    public List<VisaInformation> getVisas() {
+        return visas;
+    }
+
+    public void setVisas(List<VisaInformation> visas) {
+        this.visas = visas;
     }
 }

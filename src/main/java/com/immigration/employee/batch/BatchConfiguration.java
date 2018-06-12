@@ -8,13 +8,13 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.mail.internet.MimeMessage;
 import java.util.Collections;
@@ -34,6 +34,7 @@ public class BatchConfiguration {
     @Value("${spring.mail.username}")
     private String sender;
 
+    //uses spring data to read the value from db
     @Bean
     public RepositoryItemReader<User> reader() {
         RepositoryItemReader<User> reader = new RepositoryItemReader<>();
@@ -44,8 +45,8 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public UserItemProcessor processor() {
-        return new UserItemProcessor(sender);
+    public ImmigrationStatusProcessor gnibprocessor() {
+        return new ImmigrationStatusProcessor(sender);
     }
 
     @Bean
@@ -55,13 +56,12 @@ public class BatchConfiguration {
     }
 
     @Bean
+    @Scheduled(fixedRate = 1)
     public Job importUserJob(JobExecutionListener listener) {
         return this.jobBuilderFactory.get("importUserJob")
                 .incrementer(new DynamicJobParameters())
                 .listener(listener)
-//                .start(chunkStep())
-                .flow(chunkStep())
-                .end()
+                .start(chunkStep())
                 .build();
     }
 
@@ -71,7 +71,7 @@ public class BatchConfiguration {
         return stepBuilderFactory.get("chunkStep")
                 .<User, MimeMessage>chunk(10)
                 .reader(reader())
-                .processor(processor())
+                .processor(gnibprocessor())
                 .writer(writer())
                 .build();
     }
